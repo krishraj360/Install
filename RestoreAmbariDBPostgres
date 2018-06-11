@@ -1,0 +1,11 @@
+su postgres -c 'psql -c "drop database ambari" '
+su postgres -c 'psql -c "\l" '
+su postgres -c 'psql -c "CREATE ROLE ambari;" '
+su postgres -c 'psql -c "CREATE ROLE postgres;" '
+su postgres -c 'psql -c "ALTER ROLE "ambari” WITH LOGIN;" '
+su postgres -c 'psql -c "ALTER ROLE "ambari" WITH LOGIN;" '
+su postgres -c 'psql -c "CREATE DATABASE ambari;" '
+su postgres -c 'psql -c "ALTER DATABASE ambari OWNER TO postgres;" '
+su postgres -c 'psql -c "GRANT ALL ON DATABASE ambari TO postgres;" '
+psql ambari < /tmp/ambari_db_20180611.sql
+su postgres -c 'psql -f /tmp/ambari_db_20180611.sql -d ambari'
